@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "../../PlatformIO/Projects/5CSRTTarduino"
+		},
+		{
+			"name": "Feeder",
+			"path": "../../../../.platformio/GPCB/Feeder"
+		},
+		{
+			"name": "test_board",
+			"path": "../../../../.platformio/GPCB/test_board"
+		},
+		{
+			"name": "Test_20x4_lcd",
+			"path": "../../PlatformIO/Projects/Test_20x4_lcd"
+		},
+		{
+			"name": "MotherBoard-rat",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
