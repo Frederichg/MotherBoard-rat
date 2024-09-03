@@ -9,9 +9,12 @@
  * micro - Microstepping value (can be 1, 2, 4, 8, 16, 32)
  */
 #include <Arduino.h>
-#define ENA 8      // Enable pin for stepper driver
-#define DIR 7      // Direction pin for stepper driver
-#define PUL 6      // Pulse pin for stepper driver
+
+//Borad V1, ENA GPB7, DIR GPB6, PUL GPB5
+//Board V2, ENA 10, DIR 5, PUL 18
+#define ENA 10  //8      // Enable pin for stepper driver
+#define DIR 5   //7      // Direction pin for stepper driver
+#define PUL 18  //6      // Pulse pin for stepper driver
 #define micro 1   // Can be 1, 2, 4, 8, 16, 32
 
 void setup() {
