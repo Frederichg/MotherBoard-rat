@@ -1,3 +1,4 @@
+'''Attention le module doit avoir du courant du powersupply pour fonctionner'''
 
 #include <Arduino.h>
 #include "FS.h"
@@ -7,7 +8,7 @@
 #define MISO  12
 #define MOSI  13
 #define CS  15
-SPIClass spi = SPIClass(HSPI);
+SPIClass spi = SPIClass(VSPI);
 
 
 void listDir(fs::FS &fs, const char * dirname, uint8_t levels){

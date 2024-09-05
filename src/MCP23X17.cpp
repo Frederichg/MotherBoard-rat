@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Adafruit_MCP23X17.h>
 
-#define LED_PIN 7 // GPIO A7
+#define LED_PIN 0 // GPIO A7
 
 Adafruit_MCP23X17 mcp;
 

@@ -9,8 +9,8 @@ char keys[ROWS][COLS] = {
   {'7','8','9'},
   {'*','0','#'}
 };
-byte rowPins[ROWS] = {5, 18, 23, 19}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {4, 9, 10}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {36, 37, 38, 39}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {34, 35, 32}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 void setup(){
