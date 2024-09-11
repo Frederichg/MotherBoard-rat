@@ -1,4 +1,4 @@
-'''Attention le module doit avoir du courant du powersupply pour fonctionner'''
+// Attention le module doit avoir du courant du powersupply pour fonctionner
 
 #include <Arduino.h>
 #include "FS.h"
