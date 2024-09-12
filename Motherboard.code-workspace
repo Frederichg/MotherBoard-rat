@@ -10,6 +10,10 @@
 		{
 			"name": "MotherBoard-rat",
 			"path": "."
+		},
+		{
+			"name": "weigh_stations",
+			"path": "../weigh_stations/weigh_stations"
 		}
 	],
 	"settings": {}
