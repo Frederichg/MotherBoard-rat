@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #define Lever_pin 23 // Lever pin
+#define BUTTON_PIN 9 // 28 GPIO GPA7
 
 #define ENA 10  //8      // Enable pin for stepper driver
 #define DIR 5   //7      // Direction pin for stepper driver
@@ -13,6 +14,8 @@ void Reward_out();
 
 void setup() {
   pinMode(Lever_pin, OUTPUT);
+  digitalWrite(Lever_pin, HIGH);
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Enable internal pull-up resistor
   pinMode(ENA, OUTPUT);
   pinMode(DIR, OUTPUT);
   pinMode(PUL, OUTPUT);
@@ -25,15 +28,16 @@ void setup() {
 void loop() {
   //Serial.print("on");
   digitalWrite(Lever_pin, HIGH);
-  delay(2000);
+  //delay(2000);
 
+  if (digitalRead(BUTTON_PIN) == LOW) { // Check for LOW state
+      Serial.println("Button pressed!");
+      // Call the Reward_out function
+      Reward_out();
 
-  // Call the Reward_out function
-  Reward_out();
-
-  digitalWrite(Lever_pin, LOW);
-  delay(2000);
-
+  //digitalWrite(Lever_pin, LOW);
+  delay(1000);
+   }
 
 }
 
