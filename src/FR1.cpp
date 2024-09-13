@@ -11,9 +11,6 @@
 
 // Function declaration
 void Reward_out();
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 100;   // the debounce time; increase if the output flickers
-
 
 void setup() {
   pinMode(Lever_pin, OUTPUT);
@@ -23,64 +20,39 @@ void setup() {
   pinMode(DIR, OUTPUT);
   pinMode(PUL, OUTPUT);
   digitalWrite(ENA, HIGH); // Disable motor
-  digitalWrite(DIR, HIGH); // Clockwise when looking from top
+  digitalWrite(DIR, LOW); // Clockwise when looking from top
   digitalWrite(PUL, LOW); // Start out LOW
   Serial.begin(115200); // Initialize serial communication
 }
 
 void loop() {
-  static bool buttonState = HIGH;  // the current reading from the input pin
-  static bool lastButtonState = HIGH;  // the previous reading from the input pin
-
-  // read the state of the switch into a local variable:
-  int reading = digitalRead(BUTTON_PIN);
-
-  // check to see if you just pressed the button
-  // (i.e. the input went from HIGH to LOW), and you've waited
-  // long enough since the last press to ignore any noise:
-
-  // If the switch changed, due to noise or pressing:
-  if (reading != lastButtonState) {
-    // reset the debouncing timer
-    lastDebounceTime = millis();
-  }
-
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    // whatever the reading is at, it's been there for longer
-    // than the debounce delay, so take it as the actual current state:
-
-    // if the button state has changed:
-    if (reading != buttonState) {
-      buttonState = reading;
-
-      // only trigger the function if the new button state is LOW
-      if (buttonState == LOW) {
-        Serial.println("Button pressed!");
-        Reward_out();
-      }
-    }
-  }
-
-  // save the reading. Next time through the loop,
-  // it'll be the lastButtonState:
-  lastButtonState = reading;
-
+  //Serial.print("on");
   digitalWrite(Lever_pin, HIGH);
-  delay(50);
-  digitalWrite(Lever_pin, LOW);
-  delay(50);
+  //delay(2000);
+
+  if (digitalRead(BUTTON_PIN) == LOW) { // Check for LOW state
+      Serial.println("Button pressed!");
+      // Call the Reward_out function
+      Reward_out();
+
+  //digitalWrite(Lever_pin, LOW);
+  delay(1000);
+   }
+
 }
 
 void Reward_out() {
   digitalWrite(ENA, LOW);
   delay(100);
-  for (int x = 0; x < (200 / 2) * micro; x++) {
+  for (int x = 0; x < (200/2) * micro; x++) {
     digitalWrite(PUL, HIGH);
     delayMicroseconds(500 / micro);
     digitalWrite(PUL, LOW);
     delayMicroseconds(500 / micro);
+    delayMicroseconds(1000);  //It is a way to slow it down
   }
   delay(100);
   digitalWrite(ENA, HIGH);
   delay(1000);
+  
 }
