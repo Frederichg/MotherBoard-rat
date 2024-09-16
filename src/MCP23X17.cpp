@@ -23,8 +23,9 @@ void loop() {
   mcp.digitalWrite(LED_PIN, HIGH);
   delay(50);
   
-  if (digitalRead(BUTTON_PIN) == LOW) { // Check for LOW state
-    Serial.println("Button pressed!");
+  //if (digitalRead(BUTTON_PIN) == LOW)
+   { // Check for LOW state
+    Serial.println(digitalRead(BUTTON_PIN));
   
   mcp.digitalWrite(LED_PIN, LOW);
   delay(50);
