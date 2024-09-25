@@ -30,8 +30,8 @@ void setup() {
 
 void loop() {
   // Check if there is any serial input
-  if (Serial.available() > 0) {
-    String command = Serial.readStringUntil('\n');
+  while (Serial.available()) {
+    String command = Serial.readString();
     if (command == "FDR") { // Check if the command is exactly "FDR"
       Serial.println("FDR command received.");
       Reward_out();
@@ -49,7 +49,8 @@ void loop() {
 }
 
 void Reward_out() {
-  Serial.println("Reward triggered: Motor running...");
+  //Serial.println("Reward triggered: Motor running...");
+  digitalWrite(DIR, HIGH);  // Clockwise when looking from top
   digitalWrite(ENA, LOW);  // Enable motor
   delay(100);
   for (int x = 0; x < (200 / 2) * micro; x++) {
@@ -62,5 +63,5 @@ void Reward_out() {
   delay(100);
   digitalWrite(ENA, HIGH);  // Disable motor
   //delay(1000);  // Wait before allowing another reward
-  Serial.println("Reward finished: Motor stopped.");
+  //Serial.println("Reward finished: Motor stopped.");
 }
