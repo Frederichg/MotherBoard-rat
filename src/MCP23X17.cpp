@@ -1,33 +1,38 @@
-//This one test the multiplexer
-//It test an input direct to the ESP32
-
 #include <Arduino.h>
 #include <Adafruit_MCP23X17.h>
 
-#define LED_PIN 3 // GPIO A7
-#define BUTTON_PIN 9 // 28 GPIO GPA7
+#define SENSOR_PIN 5 // Corresponds to GPA5 la 3e pin from notch A side
+//Work well with either 1 or 10k pin to ground when using 5v directly
+//Carfull not to forget to connect all ground together
 
 Adafruit_MCP23X17 mcp;
 
 void setup() {
-  Serial.begin(115200); // Initialize serial communication
-  if (!mcp.begin_I2C(0x20)) { // I2C address. Can be 0x20 to 0x27, depending on the A0, A1, and A2 pins. If all 0, the address is 0x20.
-    Serial.println("Error.");
+  Serial.begin(115200);
+
+  // Initialize the MCP23017
+  if (!mcp.begin_I2C(0x20)) { // Default I2C address is 0x20
+    Serial.println("Error initializing MCP23017.");
     while (1);
   }
-  mcp.pinMode(LED_PIN, OUTPUT);
-  pinMode(BUTTON_PIN, INPUT_PULLUP); // Enable internal pull-up resistor
+
+  // Configure the pin as input
+  mcp.pinMode(SENSOR_PIN, INPUT);
+
+  // Ensure pull-up resistors are globally disabled (manually check library documentation for any helper methods)
+  // This step will be skipped if unsupported in the library version being used.
 }
 
 void loop() {
-  mcp.digitalWrite(LED_PIN, HIGH);
-  delay(50);
-  
-  //if (digitalRead(BUTTON_PIN) == LOW)
-   { // Check for LOW state
-    Serial.println(digitalRead(BUTTON_PIN));
-  
-  mcp.digitalWrite(LED_PIN, LOW);
-  delay(50);
+  // Read the sensor state
+  int sensorState = mcp.digitalRead(SENSOR_PIN);
+
+  // Print the sensor state
+  if (sensorState == HIGH) {
+    Serial.println("HIGH");
+  } else {
+    Serial.println("LOW");
   }
+
+  delay(500);
 }
