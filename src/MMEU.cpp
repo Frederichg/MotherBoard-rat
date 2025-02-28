@@ -1,3 +1,9 @@
+
+///Work with the V2 Board ENA 10, DIR 5, PUL 18
+// Fred 28 feb 2025
+
+#TODO: add a total duration of the experiment shutdown.
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>

@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <RTClib.h>
+#include "SPI.h"
 
 RTC_DS3231 rtc;  // Use this for DS3231 RTC
 // For DS1307, you can use RTC_DS1307 rtc;
@@ -40,27 +41,9 @@ void setup() {
   
   // Adjust the RTC with the entered date and time
   rtc.adjust(DateTime(year, month, day, hour, minute, second));
-  
-  Serial.println("Time and date have been set!");
+  Serial.println("RTC time set successfully!");
 }
 
 void loop() {
-  // Get the current time
-  DateTime now = rtc.now();
-
-  // Display the time
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print(" ");
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.println();
-
-  delay(1000);  // Wait 1 second before reading the time again
+  // Nothing to do here
 }
