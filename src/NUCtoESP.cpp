@@ -2,7 +2,7 @@
 // computer send a reward signal to the stepper motor. The stepper motor will
 // turn a certain amount of steps to dispense the reward. 
 // The manual advance also working
-// Fred 19 sept 2024
+// Fred 19 sept 2024, for the rat touchscreen setup
 
 
 #include <Arduino.h>

@@ -1,10 +1,15 @@
 #include "Arduino.h"
 #include "Wire.h"
 
+#define SDA_PIN 21
+#define SCL_PIN 22
+
 void setup() {
   Serial.begin(115200);
-  Wire.begin();
+  Wire.begin(SDA_PIN, SCL_PIN);
+  Serial.println("I2C Scanner initialized");
 }
+
 void loop() {
   byte error, address;
   int nDevices = 0;
@@ -22,5 +27,7 @@ void loop() {
   }
   if (nDevices == 0){
     Serial.println("No I2C devices found");
+  } else {
+    Serial.printf("Found %d devices\n", nDevices);
   }
 }

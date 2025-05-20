@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <RTClib.h>
+#include "SPI.h"
 
 RTC_DS3231 rtc;  // Use this for DS3231 RTC
 // For DS1307, you can use RTC_DS1307 rtc;

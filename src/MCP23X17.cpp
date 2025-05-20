@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include <Adafruit_MCP23X17.h>
 
-#define SENSOR_PIN 5 // Corresponds to GPA5 la 3e pin from notch A side
-//Work well with either 1 or 10k pin to ground when using 5v directly
-//Carfull not to forget to connect all ground together
+#define SENSOR_PIN 7 // Define the sensor pin
+#define LED_PIN 8    // Define the LED pin
 
 Adafruit_MCP23X17 mcp;
 
@@ -16,8 +15,9 @@ void setup() {
     while (1);
   }
 
-  // Configure the pin as input
+  // Configure the pin as input and output
   mcp.pinMode(SENSOR_PIN, INPUT);
+  mcp.pinMode(LED_PIN, OUTPUT);
 
   // Ensure pull-up resistors are globally disabled (manually check library documentation for any helper methods)
   // This step will be skipped if unsupported in the library version being used.
@@ -28,10 +28,16 @@ void loop() {
   int sensorState = mcp.digitalRead(SENSOR_PIN);
 
   // Print the sensor state
+  Serial.print("Sensor state: ");
+  Serial.println(sensorState);
+
+  // Control the LED based on the sensor state
   if (sensorState == HIGH) {
-    Serial.println("HIGH");
+    Serial.println("Turning LED OFF");
+    mcp.digitalWrite(LED_PIN, LOW); // Turn off the LED
   } else {
-    Serial.println("LOW");
+    Serial.println("Turning LED ON");
+    mcp.digitalWrite(LED_PIN, HIGH); // Turn on the LED
   }
 
   delay(500);
